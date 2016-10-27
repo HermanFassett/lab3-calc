@@ -1,1 +1,9 @@
 U:\Lab3\Lab3\bin\Debug\Lab3.exe.config
+U:\Lab3\Lab3\bin\Debug\Lab3.exe
+U:\Lab3\Lab3\bin\Debug\Lab3.pdb
+U:\Lab3\Lab3\obj\Debug\Lab3.csprojResolveAssemblyReference.cache
+U:\Lab3\Lab3\obj\Debug\Lab3.Form1.resources
+U:\Lab3\Lab3\obj\Debug\Lab3.Properties.Resources.resources
+U:\Lab3\Lab3\obj\Debug\Lab3.csproj.GenerateResource.Cache
+U:\Lab3\Lab3\obj\Debug\Lab3.exe
+U:\Lab3\Lab3\obj\Debug\Lab3.pdb

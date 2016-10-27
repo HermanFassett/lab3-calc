@@ -16,5 +16,16 @@ namespace Lab3
         {
             InitializeComponent();
         }
+
+        public void btnNumberClick(object sender, EventArgs e)
+        {
+            Button obj = (Button)sender;
+            txtBox.Text += obj.Text;
+        }
+
+        public void btnOperatorClick(object sender, EventArgs e)
+        {
+            Button obj = (Button)sender;
+        }
     }
 }
