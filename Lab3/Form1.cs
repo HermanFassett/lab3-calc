@@ -27,5 +27,15 @@ namespace Lab3
         {
             Button obj = (Button)sender;
         }
+
+        private void btnEqualsClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnParenClick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
