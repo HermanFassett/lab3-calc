@@ -156,12 +156,10 @@ namespace Lab3
 
         private string calculate(string expression)
         {
-            
             // Add a space so eval calculatues correctly
             while (expression.Contains("--"))
             {
                 expression = expression.Replace(@"--", "- -");
-                
             }
             // Add * symbol for eval parentheses multiplication
             expression = Regex.Replace(expression, @"(\d)(\()", "$1*$2");
@@ -183,77 +181,13 @@ namespace Lab3
                 }
                 expression = expression.Substring(0, m.Index) + calculate(exp) + expression.Substring(i + 1);
             }
-            //// Math pow instead of bitwise or ^
+            // Math pow instead of bitwise or ^
             while (expression.Contains("^"))
             {
                 expression = Regex.Replace(expression, @"(\d+)\^(\d+)",
                     m => Math.Pow(Double.Parse(m.Groups[1].Value), Double.Parse(m.Groups[2].Value)).ToString());
             }
-            //// Case x^(x+x)
-            //foreach (Match m in Regex.Matches(expression, @"(\d+)\^\("))
-            //{
-            //    string exp = "";
-            //    int count = 1;
-            //    for (int i = m.Index; i < expression.Length && count > 0; i++)
-            //    {
-            //        if (expression[i] == '(') count++;
-            //        else if (expression[i] == ')')
-            //        {
-            //            if (count == 0) break;
-            //            else count--;
-            //        }
-            //        exp += expression[i];
-            //    }
-            //}
-            // Replace ^ with calculated Math pow since ^ isn't exponentiation in eval
-            //while (expression.Contains("^"))
-            //{
-            //    expression = Regex.Replace(expression, @"(\(([^\)]+)\))\^(\(([^\)]+)\))|(((\d+)\^\(([^\)]+))\))|(\(([^\)]+)\))\^(\d+)|(\d+)\^(\d+)",
-            //       m =>
-            //       {
-            //           string x = "Err", y = "Err";
-            //           // Case x^x
-            //           if (m.Groups[12].Success && m.Groups[13].Success)
-            //           {
-            //               x = m.Groups[12].Value;
-            //               y = m.Groups[13].Value;
-            //           }
-            //           // Case (x+x)^x
-            //           else if (m.Groups[10].Success && m.Groups[11].Success)
-            //           {
-            //               x = calculate(m.Groups[10].Value);
-            //               y = m.Groups[11].Value;
-            //           }
-            //           // Case x^(x+x)
-            //           else if (m.Groups[7].Success && m.Groups[8].Success)
-            //           {
-            //               x = m.Groups[7].Value;
-            //               y = "";// calculate(m.Groups[8].Value);
-            //               int count = 1;
-            //               for (int i = m.Groups[8].Index; i < expression.Length && count > 0; i++)
-            //               {
-            //                   if (expression[i] == '(')
-            //                   {
-            //                       count++;
-            //                   }
-            //                   else if (expression[i] == ')')
-            //                   {
-            //                       count--;
-            //                       if (count == 0) break;
-            //                   }
-            //                   y += expression[i];
-            //               }
-            //               y = calculate(y);
-            //           }
-            //           //// Case (x+x)^(x+x)
-            //           //else if (m.Groups[2].Success && m.Groups[4].Success)
-            //           //{
-            //           //    x = calculate(m.Groups[2].Value);
-            //           //    y = calculate(m.Groups[4].Value);
-            //           //}
-            //           return "" + Math.Pow(Double.Parse(x), Double.Parse(y));
-            //       });
-            //}
+            // Calculate value
             object answer;
             try
             {
