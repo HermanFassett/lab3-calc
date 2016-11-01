@@ -61,6 +61,7 @@
             this.txtBox.ReadOnly = true;
             this.txtBox.Size = new System.Drawing.Size(188, 40);
             this.txtBox.TabIndex = 0;
+            this.txtBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btn1
             // 
