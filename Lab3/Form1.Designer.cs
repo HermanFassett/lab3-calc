@@ -48,6 +48,7 @@
             this.btnEquals = new System.Windows.Forms.Button();
             this.btnParenR = new System.Windows.Forms.Button();
             this.btnParenL = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtBox
@@ -56,18 +57,16 @@
             this.txtBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBox.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox.Location = new System.Drawing.Point(13, 13);
-            this.txtBox.Multiline = true;
             this.txtBox.Name = "txtBox";
             this.txtBox.ReadOnly = true;
             this.txtBox.Size = new System.Drawing.Size(188, 40);
             this.txtBox.TabIndex = 0;
-            this.txtBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btn1
             // 
             this.btn1.BackColor = System.Drawing.Color.White;
             this.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn1.Location = new System.Drawing.Point(13, 207);
+            this.btn1.Location = new System.Drawing.Point(14, 207);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(40, 40);
             this.btn1.TabIndex = 1;
@@ -175,9 +174,9 @@
             // 
             this.btn0.BackColor = System.Drawing.Color.White;
             this.btn0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn0.Location = new System.Drawing.Point(13, 253);
+            this.btn0.Location = new System.Drawing.Point(14, 253);
             this.btn0.Name = "btn0";
-            this.btn0.Size = new System.Drawing.Size(86, 40);
+            this.btn0.Size = new System.Drawing.Size(40, 40);
             this.btn0.TabIndex = 1;
             this.btn0.Text = "0";
             this.btn0.UseVisualStyleBackColor = false;
@@ -187,7 +186,7 @@
             // 
             this.btnPoint.BackColor = System.Drawing.Color.White;
             this.btnPoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPoint.Location = new System.Drawing.Point(105, 253);
+            this.btnPoint.Location = new System.Drawing.Point(59, 253);
             this.btnPoint.Name = "btnPoint";
             this.btnPoint.Size = new System.Drawing.Size(40, 40);
             this.btnPoint.TabIndex = 1;
@@ -291,6 +290,18 @@
             this.btnParenL.UseVisualStyleBackColor = false;
             this.btnParenL.Click += new System.EventHandler(this.btnParenClick);
             // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Location = new System.Drawing.Point(104, 253);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(41, 40);
+            this.btnBack.TabIndex = 1;
+            this.btnBack.Text = "<";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBackClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -309,6 +320,7 @@
             this.Controls.Add(this.btn7);
             this.Controls.Add(this.btn5);
             this.Controls.Add(this.btn4);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnEquals);
             this.Controls.Add(this.btn0);
             this.Controls.Add(this.btnPoint);
@@ -316,8 +328,10 @@
             this.Controls.Add(this.btn2);
             this.Controls.Add(this.btn1);
             this.Controls.Add(this.txtBox);
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Calculator";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -345,6 +359,7 @@
         private System.Windows.Forms.Button btnEquals;
         private System.Windows.Forms.Button btnParenR;
         private System.Windows.Forms.Button btnParenL;
+        private System.Windows.Forms.Button btnBack;
     }
 }
 
