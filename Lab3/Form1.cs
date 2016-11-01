@@ -13,6 +13,7 @@ namespace Lab3
 {
     public partial class Form1 : Form
     {
+        private bool calculated = false;
         public Form1()
         {
             InitializeComponent();
@@ -20,12 +21,14 @@ namespace Lab3
 
         public void btnNumberClick(object sender, EventArgs e)
         {
+            checkCalculated();
             Button obj = (Button)sender;
             txtBox.Text += obj.Text;
         }
 
         public void btnOperatorClick(object sender, EventArgs e)
         {
+            checkCalculated();
             Button obj = (Button)sender;
             addOperator(obj.Text[0]);
         }
@@ -37,6 +40,7 @@ namespace Lab3
 
         private void btnBackClick(object sender, EventArgs e)
         {
+            checkCalculated();
             if (txtBox.TextLength > 0)
             {
                 txtBox.Text = txtBox.Text.Remove(txtBox.Text.Length - 1);
@@ -45,12 +49,14 @@ namespace Lab3
 
         private void btnParenClick(object sender, EventArgs e)
         {
+            checkCalculated();
             Button obj = (Button)sender;
             addParen(obj.Text[0]);
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
+            checkCalculated();
             char a = e.KeyChar;
             if (Char.IsDigit(a))
             {
@@ -92,14 +98,13 @@ namespace Lab3
 
         private void addOperator(char input)
         {
-            char prev = txtBox.TextLength > 0 ? txtBox.Text[txtBox.TextLength - 1] : '0';
             switch (input)
             {
                 case '^':
                 case '/':
                 case '*':
                 case '+':
-                    if (txtBox.TextLength > 0 || checkOperator(txtBox.TextLength - 1))
+                    if (txtBox.TextLength > 0 && checkOperator(txtBox.TextLength - 1))
                     {
                         txtBox.Text += input;
                     }
@@ -131,6 +136,14 @@ namespace Lab3
             return prev != '+' && prev != '-' && prev != '/' && prev != '*' && prev != '^';
         }
 
+        private void checkCalculated()
+        {
+            if (calculated)
+            {
+                txtBox.Text = "";
+                calculated = false;
+            }
+        }
         private void calculate(String expression)
         {
             MSScriptControl.ScriptControl msc = new MSScriptControl.ScriptControl();
@@ -153,6 +166,7 @@ namespace Lab3
                 answer = "Err";
             }
             txtBox.Text = answer.ToString();
+            calculated = true;
         }
     }
 }
