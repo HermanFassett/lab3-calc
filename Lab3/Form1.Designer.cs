@@ -55,13 +55,16 @@
             // 
             this.txtBox.BackColor = System.Drawing.Color.White;
             this.txtBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBox.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBox.Location = new System.Drawing.Point(13, 13);
+            this.txtBox.Multiline = true;
             this.txtBox.Name = "txtBox";
             this.txtBox.ReadOnly = true;
-            this.txtBox.Size = new System.Drawing.Size(188, 40);
+            this.txtBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtBox.Size = new System.Drawing.Size(188, 50);
             this.txtBox.TabIndex = 0;
             this.txtBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtBox.TextChanged += new System.EventHandler(this.txtBox_TextChanged);
             // 
             // btn1
             // 

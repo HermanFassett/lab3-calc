@@ -24,65 +24,51 @@ namespace Lab3
 
         public void btnNumberClick(object sender, EventArgs e)
         {
-            checkCalculated();
             Button obj = (Button)sender;
             txtBox.Text += obj.Text;
         }
 
         public void btnOperatorClick(object sender, EventArgs e)
         {
-            checkCalculated();
             Button obj = (Button)sender;
             addOperator(obj.Text[0]);
         }
 
         private void btnEqualsClick(object sender, EventArgs e)
         {
-            string answer = calculate(txtBox.Text);
-            txtBox.Text = answer;
-            calculated = true;
+            if (txtBox.TextLength > 0 && checkOperator(txtBox.TextLength - 1))
+            {
+                string answer = calculate(txtBox.Text);
+                txtBox.Text = answer;
+                calculated = true;
+            }
         }
 
         private void btnBackClick(object sender, EventArgs e)
         {
-            checkCalculated();
             if (txtBox.TextLength > 0)
-            {
                 txtBox.Text = txtBox.Text.Remove(txtBox.Text.Length - 1);
-            }
         }
 
         private void btnParenClick(object sender, EventArgs e)
         {
-            checkCalculated();
             Button obj = (Button)sender;
             addParen(obj.Text[0]);
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            checkCalculated();
             char a = e.KeyChar;
             if (Char.IsDigit(a))
-            {
                 txtBox.Text += a;
-            }
             else if (a == '+' || a == '-' || a == '*' || a == '/' || a == '^')
-            {
                 addOperator(a);  
-            }
             else if (a == '(' || a == ')')
-            {
                 addParen(a);
-            }
-            else if (a == (char)Keys.Enter || a == 13)
-            {
+            else if (a == (char)Keys.Enter)
                 btnEquals.PerformClick();
-            }
             else if (a == (char)Keys.Back)
-            {
                 btnBack.PerformClick();
-            }
             else if (a == '.')
             {
                 int count = 0, i = txtBox.TextLength - 1;
@@ -94,14 +80,7 @@ namespace Lab3
                         break;
                     }
                 }
-                if (count == 0)
-                {
-                    txtBox.Text += a;
-                }
-            }
-            else
-            {
-                Console.WriteLine(a);
+                if (count == 0) txtBox.Text += a;
             }
         }
 
@@ -114,9 +93,7 @@ namespace Lab3
                 case '*':
                 case '+':
                     if (txtBox.TextLength > 0 && checkOperator(txtBox.TextLength - 1))
-                    {
                         txtBox.Text += input;
-                    }
                     break;
                 case '-':
                     txtBox.Text += input;
@@ -126,16 +103,11 @@ namespace Lab3
 
         private void addParen(char input)
         {
-            if (input == '(')
-            {
-                txtBox.Text += input;
-            }
+            if (input == '(') txtBox.Text += input;
             else if (input == ')')
             {
                 if (txtBox.Text[txtBox.TextLength - 1] != '(')
-                {
                     txtBox.Text += input;
-                }
             }
         }
 
@@ -145,11 +117,13 @@ namespace Lab3
             return prev != '+' && prev != '-' && prev != '/' && prev != '*' && prev != '^';
         }
 
-        private void checkCalculated()
+        private void checkCalculated(char a)
         {
             if (calculated)
             {
-                txtBox.Text = "";
+                if (Char.IsDigit(a)) txtBox.Text = a.ToString();
+                else if (a == '.' || a == (char)Keys.Enter || a == (char)Keys.Back)
+                    txtBox.Text = "";
                 calculated = false;
             }
         }
@@ -184,7 +158,7 @@ namespace Lab3
             // Math pow instead of bitwise or ^
             while (expression.Contains("^"))
             {
-                expression = Regex.Replace(expression, @"(\d+)\^(\d+)",
+                expression = Regex.Replace(expression, @"([\.\d]+)\^([\.\d]+)",
                     m => Math.Pow(Double.Parse(m.Groups[1].Value), Double.Parse(m.Groups[2].Value)).ToString());
             }
             // Calculate value
@@ -198,6 +172,24 @@ namespace Lab3
                 answer = "Err: " + ex.ToString();
             }
             return answer.ToString();
+        }
+
+        private void txtBox_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBox.TextLength > 0) 
+            {
+                checkCalculated(txtBox.Text[txtBox.TextLength - 1]);
+
+                if (!checkOperator(txtBox.TextLength - 1) ||
+                    Regex.Matches(txtBox.Text, @"\(").Count != Regex.Matches(txtBox.Text, @"\)").Count)
+                {
+                    txtBox.BackColor = Color.FromArgb(255, 192, 192);
+                }
+                else
+                {
+                    txtBox.BackColor = Color.FromArgb(192, 255, 192);
+                }
+            }
         }
     }
 }
