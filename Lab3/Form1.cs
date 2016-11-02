@@ -13,128 +13,146 @@ namespace Lab3
 {
     public partial class Form1 : Form
     {
+        // Global Variable Declaration
         MSScriptControl.ScriptControl msc = new MSScriptControl.ScriptControl();
         private bool calculated = false;
 
+        // Form Constructor
         public Form1()
         {
             msc.Language = "JavaScript";
             InitializeComponent();
         }
 
-        public void btnNumberClick(object sender, EventArgs e)
+        // All button events for main input
+        private void btnClick(object sender, EventArgs e)
         {
             Button obj = (Button)sender;
-            txtBox.Text += obj.Text;
+            inputEvent(obj.Text[0]);
         }
 
-        public void btnOperatorClick(object sender, EventArgs e)
-        {
-            Button obj = (Button)sender;
-            addOperator(obj.Text[0]);
-        }
-
-        private void btnEqualsClick(object sender, EventArgs e)
-        {
-            if (txtBox.TextLength > 0 && checkOperator(txtBox.TextLength - 1))
-            {
-                string answer = calculate(txtBox.Text);
-                txtBox.Text = answer;
-                calculated = true;
-            }
-        }
-
-        private void btnBackClick(object sender, EventArgs e)
-        {
-            if (txtBox.TextLength > 0)
-                txtBox.Text = txtBox.Text.Remove(txtBox.Text.Length - 1);
-        }
-
-        private void btnParenClick(object sender, EventArgs e)
-        {
-            Button obj = (Button)sender;
-            addParen(obj.Text[0]);
-        }
-
+        // Keypress events (to add alternate input method)
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             char a = e.KeyChar;
-            if (Char.IsDigit(a))
-                txtBox.Text += a;
-            else if (a == '+' || a == '-' || a == '*' || a == '/' || a == '^')
-                addOperator(a);  
-            else if (a == '(' || a == ')')
-                addParen(a);
-            else if (a == (char)Keys.Enter)
-                btnEquals.PerformClick();
-            else if (a == (char)Keys.Back)
-                btnBack.PerformClick();
-            else if (a == '.')
-            {
-                int count = 0, i = txtBox.TextLength - 1;
-                for (; i > 0 && checkOperator(i); i--)
-                {
-                    if (txtBox.Text[i] == '.')
-                    {
-                        count++;
-                        break;
-                    }
-                }
-                if (count == 0) txtBox.Text += a;
-            }
+            inputEvent(a);
         }
 
+        // Handle all input
+        private void inputEvent(char a)
+        {
+            checkCalculated(a);
+            switch (a)
+            {
+                case '+':
+                case '-':
+                case '*':
+                case '/':
+                case '^':
+                    addOperator(a);
+                    break;
+                case '(':
+                case ')':
+                    addParen(a);
+                    break;
+                case '=':
+                case (char)Keys.Enter:
+                    if (txtBox.TextLength > 0 && checkOperator(txtBox.TextLength - 1))
+                    {
+                        string answer = calculate(txtBox.Text);
+                        txtBox.Text = answer;
+                        calculated = true;
+                    }
+                    break;
+                case '<':
+                case (char)Keys.Back:
+                    if (txtBox.TextLength > 0)
+                        txtBox.Text = txtBox.Text.Remove(txtBox.Text.Length - 1);
+                    break;
+                case '.':
+                    // Make sure only one point is in current number
+                    int count = 0, i = txtBox.TextLength - 1;
+                    for (; i > 0 && checkOperator(i); i--)
+                    {
+                        if (txtBox.Text[i] == '.')
+                        {
+                            count++;
+                            break;
+                        }
+                    }
+                    if (count == 0) txtBox.Text += '.';
+                    break;
+                default:
+                    if (Char.IsDigit(a)) txtBox.Text += a;
+                    break;
+            }
+            validateExpression();
+        }
+
+        // Adds operator to expression only if valid
         private void addOperator(char input)
         {
-            switch (input)
-            {
-                case '^':
-                case '/':
-                case '*':
-                case '+':
-                    if (txtBox.TextLength > 0 && checkOperator(txtBox.TextLength - 1))
-                        txtBox.Text += input;
-                    break;
-                case '-':
-                    txtBox.Text += input;
-                    break;
-            }
+            if (input == '-' || txtBox.TextLength > 0 && checkOperator(txtBox.TextLength - 1)) 
+                txtBox.Text += input;
         }
 
+        // Adds parentheses to expression if valid to do so
         private void addParen(char input)
         {
             if (input == '(') txtBox.Text += input;
-            else if (input == ')')
-            {
-                if (txtBox.Text[txtBox.TextLength - 1] != '(')
-                    txtBox.Text += input;
-            }
+            else if (input == ')' && txtBox.Text[txtBox.TextLength - 1] != '(' &&
+                Regex.Matches(txtBox.Text, @"\(").Count > Regex.Matches(txtBox.Text, @"\)").Count)
+                txtBox.Text += input;
         }
 
+        // Checks if the char at index is an operator
         private bool checkOperator(int index)
         {
             char prev = txtBox.Text[index];
             return prev != '+' && prev != '-' && prev != '/' && prev != '*' && prev != '^';
         }
 
+        // Overload checkOperator function
+        private bool checkOperator(char a)
+        {
+            return a != '+' && a != '-' && a != '/' && a!= '*' && a != '^';
+        }
+
+        // If last action was calculate, acts on text accordingly with input
         private void checkCalculated(char a)
         {
-            if (calculated)
+            if (calculated && a != (char)Keys.Enter)
             {
-                if (Char.IsDigit(a)) txtBox.Text = a.ToString();
-                else if (a == '.' || a == (char)Keys.Enter || a == (char)Keys.Back)
-                    txtBox.Text = "";
+                if (checkOperator(a)) txtBox.Text = "";
                 calculated = false;
             }
         }
 
+        // Validate expression
+        private void validateExpression()
+        {
+            // Change TextBox back color for if expression is valid, invalid, or calculated
+            if (txtBox.TextLength > 0 && !checkOperator(txtBox.TextLength - 1) ||
+                Regex.Matches(txtBox.Text, @"\(").Count != Regex.Matches(txtBox.Text, @"\)").Count)
+                // Set to a light shade of red
+                txtBox.BackColor = Color.FromArgb(255, 235, 235);
+            else if (!calculated)
+                // Set to a light shade of green
+                txtBox.BackColor = Color.FromArgb(235, 255, 235);
+            else
+                // Set to white
+                txtBox.BackColor = Color.White;
+            // Set caret at end of text and scroll
+            txtBox.Select(txtBox.TextLength, 0);
+            txtBox.ScrollToCaret();
+        }
+
+        // Calculate the expression
         private string calculate(string expression)
         {
             // Add a space so eval calculatues correctly
             while (expression.Contains("--"))
-            {
                 expression = expression.Replace(@"--", "- -");
-            }
             // Add * symbol for eval parentheses multiplication
             expression = Regex.Replace(expression, @"(\d)(\()", "$1*$2");
             // Calculate inside parentheses first
@@ -158,8 +176,8 @@ namespace Lab3
             // Math pow instead of bitwise or ^
             while (expression.Contains("^"))
             {
-                expression = Regex.Replace(expression, @"([\.\d]+)\^([\.\d]+)",
-                    m => Math.Pow(Double.Parse(m.Groups[1].Value), Double.Parse(m.Groups[2].Value)).ToString());
+                expression = Regex.Replace(expression, @"([\.\d(E+)]+)\^([\.\d]+)",
+                    m => Math.Pow(Double.Parse(m.Groups[1].Value), Double.Parse(m.Groups[2].Value)).ToString(), RegexOptions.RightToLeft);
             }
             // Calculate value
             object answer;
@@ -169,27 +187,9 @@ namespace Lab3
             }
             catch (Exception ex)
             {
-                answer = "Err: " + ex.ToString();
+                answer = "Err";
             }
             return answer.ToString();
-        }
-
-        private void txtBox_TextChanged(object sender, EventArgs e)
-        {
-            if (txtBox.TextLength > 0) 
-            {
-                checkCalculated(txtBox.Text[txtBox.TextLength - 1]);
-
-                if (!checkOperator(txtBox.TextLength - 1) ||
-                    Regex.Matches(txtBox.Text, @"\(").Count != Regex.Matches(txtBox.Text, @"\)").Count)
-                {
-                    txtBox.BackColor = Color.FromArgb(255, 192, 192);
-                }
-                else
-                {
-                    txtBox.BackColor = Color.FromArgb(192, 255, 192);
-                }
-            }
         }
     }
 }

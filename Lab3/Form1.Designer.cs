@@ -64,7 +64,6 @@
             this.txtBox.Size = new System.Drawing.Size(188, 50);
             this.txtBox.TabIndex = 0;
             this.txtBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtBox.TextChanged += new System.EventHandler(this.txtBox_TextChanged);
             // 
             // btn1
             // 
@@ -73,10 +72,10 @@
             this.btn1.Location = new System.Drawing.Point(14, 207);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(40, 40);
-            this.btn1.TabIndex = 1;
+            this.btn1.TabIndex = 13;
             this.btn1.Text = "1";
             this.btn1.UseVisualStyleBackColor = false;
-            this.btn1.Click += new System.EventHandler(this.btnNumberClick);
+            this.btn1.Click += new System.EventHandler(this.btnClick);
             // 
             // btn2
             // 
@@ -85,10 +84,10 @@
             this.btn2.Location = new System.Drawing.Point(59, 207);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(40, 40);
-            this.btn2.TabIndex = 1;
+            this.btn2.TabIndex = 14;
             this.btn2.Text = "2";
             this.btn2.UseVisualStyleBackColor = false;
-            this.btn2.Click += new System.EventHandler(this.btnNumberClick);
+            this.btn2.Click += new System.EventHandler(this.btnClick);
             // 
             // btn3
             // 
@@ -97,10 +96,10 @@
             this.btn3.Location = new System.Drawing.Point(105, 207);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(40, 40);
-            this.btn3.TabIndex = 1;
+            this.btn3.TabIndex = 15;
             this.btn3.Text = "3";
             this.btn3.UseVisualStyleBackColor = false;
-            this.btn3.Click += new System.EventHandler(this.btnNumberClick);
+            this.btn3.Click += new System.EventHandler(this.btnClick);
             // 
             // btn4
             // 
@@ -109,10 +108,10 @@
             this.btn4.Location = new System.Drawing.Point(14, 161);
             this.btn4.Name = "btn4";
             this.btn4.Size = new System.Drawing.Size(40, 40);
-            this.btn4.TabIndex = 1;
+            this.btn4.TabIndex = 9;
             this.btn4.Text = "4";
             this.btn4.UseVisualStyleBackColor = false;
-            this.btn4.Click += new System.EventHandler(this.btnNumberClick);
+            this.btn4.Click += new System.EventHandler(this.btnClick);
             // 
             // btn5
             // 
@@ -121,10 +120,10 @@
             this.btn5.Location = new System.Drawing.Point(59, 161);
             this.btn5.Name = "btn5";
             this.btn5.Size = new System.Drawing.Size(40, 40);
-            this.btn5.TabIndex = 1;
+            this.btn5.TabIndex = 10;
             this.btn5.Text = "5";
             this.btn5.UseVisualStyleBackColor = false;
-            this.btn5.Click += new System.EventHandler(this.btnNumberClick);
+            this.btn5.Click += new System.EventHandler(this.btnClick);
             // 
             // btn6
             // 
@@ -133,10 +132,10 @@
             this.btn6.Location = new System.Drawing.Point(105, 161);
             this.btn6.Name = "btn6";
             this.btn6.Size = new System.Drawing.Size(40, 40);
-            this.btn6.TabIndex = 1;
+            this.btn6.TabIndex = 11;
             this.btn6.Text = "6";
             this.btn6.UseVisualStyleBackColor = false;
-            this.btn6.Click += new System.EventHandler(this.btnNumberClick);
+            this.btn6.Click += new System.EventHandler(this.btnClick);
             // 
             // btn7
             // 
@@ -145,10 +144,10 @@
             this.btn7.Location = new System.Drawing.Point(14, 115);
             this.btn7.Name = "btn7";
             this.btn7.Size = new System.Drawing.Size(40, 40);
-            this.btn7.TabIndex = 1;
+            this.btn7.TabIndex = 5;
             this.btn7.Text = "7";
             this.btn7.UseVisualStyleBackColor = false;
-            this.btn7.Click += new System.EventHandler(this.btnNumberClick);
+            this.btn7.Click += new System.EventHandler(this.btnClick);
             // 
             // btn8
             // 
@@ -157,10 +156,10 @@
             this.btn8.Location = new System.Drawing.Point(59, 115);
             this.btn8.Name = "btn8";
             this.btn8.Size = new System.Drawing.Size(40, 40);
-            this.btn8.TabIndex = 1;
+            this.btn8.TabIndex = 6;
             this.btn8.Text = "8";
             this.btn8.UseVisualStyleBackColor = false;
-            this.btn8.Click += new System.EventHandler(this.btnNumberClick);
+            this.btn8.Click += new System.EventHandler(this.btnClick);
             // 
             // btn9
             // 
@@ -169,10 +168,10 @@
             this.btn9.Location = new System.Drawing.Point(105, 115);
             this.btn9.Name = "btn9";
             this.btn9.Size = new System.Drawing.Size(40, 40);
-            this.btn9.TabIndex = 1;
+            this.btn9.TabIndex = 7;
             this.btn9.Text = "9";
             this.btn9.UseVisualStyleBackColor = false;
-            this.btn9.Click += new System.EventHandler(this.btnNumberClick);
+            this.btn9.Click += new System.EventHandler(this.btnClick);
             // 
             // btn0
             // 
@@ -181,10 +180,10 @@
             this.btn0.Location = new System.Drawing.Point(14, 253);
             this.btn0.Name = "btn0";
             this.btn0.Size = new System.Drawing.Size(40, 40);
-            this.btn0.TabIndex = 1;
+            this.btn0.TabIndex = 17;
             this.btn0.Text = "0";
             this.btn0.UseVisualStyleBackColor = false;
-            this.btn0.Click += new System.EventHandler(this.btnNumberClick);
+            this.btn0.Click += new System.EventHandler(this.btnClick);
             // 
             // btnPoint
             // 
@@ -193,10 +192,10 @@
             this.btnPoint.Location = new System.Drawing.Point(59, 253);
             this.btnPoint.Name = "btnPoint";
             this.btnPoint.Size = new System.Drawing.Size(40, 40);
-            this.btnPoint.TabIndex = 1;
+            this.btnPoint.TabIndex = 18;
             this.btnPoint.Text = ".";
             this.btnPoint.UseVisualStyleBackColor = false;
-            this.btnPoint.Click += new System.EventHandler(this.btnNumberClick);
+            this.btnPoint.Click += new System.EventHandler(this.btnClick);
             // 
             // btnAdd
             // 
@@ -205,10 +204,10 @@
             this.btnAdd.Location = new System.Drawing.Point(161, 69);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(40, 40);
-            this.btnAdd.TabIndex = 1;
+            this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "+";
             this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Click += new System.EventHandler(this.btnOperatorClick);
+            this.btnAdd.Click += new System.EventHandler(this.btnClick);
             // 
             // btnSubtract
             // 
@@ -217,10 +216,10 @@
             this.btnSubtract.Location = new System.Drawing.Point(161, 115);
             this.btnSubtract.Name = "btnSubtract";
             this.btnSubtract.Size = new System.Drawing.Size(40, 40);
-            this.btnSubtract.TabIndex = 1;
+            this.btnSubtract.TabIndex = 8;
             this.btnSubtract.Text = "-";
             this.btnSubtract.UseVisualStyleBackColor = false;
-            this.btnSubtract.Click += new System.EventHandler(this.btnOperatorClick);
+            this.btnSubtract.Click += new System.EventHandler(this.btnClick);
             // 
             // btnMultiply
             // 
@@ -229,10 +228,10 @@
             this.btnMultiply.Location = new System.Drawing.Point(161, 161);
             this.btnMultiply.Name = "btnMultiply";
             this.btnMultiply.Size = new System.Drawing.Size(40, 40);
-            this.btnMultiply.TabIndex = 1;
+            this.btnMultiply.TabIndex = 12;
             this.btnMultiply.Text = "*";
             this.btnMultiply.UseVisualStyleBackColor = false;
-            this.btnMultiply.Click += new System.EventHandler(this.btnOperatorClick);
+            this.btnMultiply.Click += new System.EventHandler(this.btnClick);
             // 
             // btnDivide
             // 
@@ -241,10 +240,10 @@
             this.btnDivide.Location = new System.Drawing.Point(161, 207);
             this.btnDivide.Name = "btnDivide";
             this.btnDivide.Size = new System.Drawing.Size(40, 40);
-            this.btnDivide.TabIndex = 1;
+            this.btnDivide.TabIndex = 16;
             this.btnDivide.Text = "/";
             this.btnDivide.UseVisualStyleBackColor = false;
-            this.btnDivide.Click += new System.EventHandler(this.btnOperatorClick);
+            this.btnDivide.Click += new System.EventHandler(this.btnClick);
             // 
             // btnExponentiate
             // 
@@ -253,10 +252,10 @@
             this.btnExponentiate.Location = new System.Drawing.Point(105, 69);
             this.btnExponentiate.Name = "btnExponentiate";
             this.btnExponentiate.Size = new System.Drawing.Size(40, 40);
-            this.btnExponentiate.TabIndex = 1;
+            this.btnExponentiate.TabIndex = 3;
             this.btnExponentiate.Text = "^";
             this.btnExponentiate.UseVisualStyleBackColor = false;
-            this.btnExponentiate.Click += new System.EventHandler(this.btnOperatorClick);
+            this.btnExponentiate.Click += new System.EventHandler(this.btnClick);
             // 
             // btnEquals
             // 
@@ -265,10 +264,10 @@
             this.btnEquals.Location = new System.Drawing.Point(161, 253);
             this.btnEquals.Name = "btnEquals";
             this.btnEquals.Size = new System.Drawing.Size(41, 40);
-            this.btnEquals.TabIndex = 1;
+            this.btnEquals.TabIndex = 20;
             this.btnEquals.Text = "=";
             this.btnEquals.UseVisualStyleBackColor = false;
-            this.btnEquals.Click += new System.EventHandler(this.btnEqualsClick);
+            this.btnEquals.Click += new System.EventHandler(this.btnClick);
             // 
             // btnParenR
             // 
@@ -280,7 +279,7 @@
             this.btnParenR.TabIndex = 2;
             this.btnParenR.Text = ")";
             this.btnParenR.UseVisualStyleBackColor = false;
-            this.btnParenR.Click += new System.EventHandler(this.btnParenClick);
+            this.btnParenR.Click += new System.EventHandler(this.btnClick);
             // 
             // btnParenL
             // 
@@ -289,10 +288,10 @@
             this.btnParenL.Location = new System.Drawing.Point(12, 69);
             this.btnParenL.Name = "btnParenL";
             this.btnParenL.Size = new System.Drawing.Size(40, 40);
-            this.btnParenL.TabIndex = 3;
+            this.btnParenL.TabIndex = 1;
             this.btnParenL.Text = "(";
             this.btnParenL.UseVisualStyleBackColor = false;
-            this.btnParenL.Click += new System.EventHandler(this.btnParenClick);
+            this.btnParenL.Click += new System.EventHandler(this.btnClick);
             // 
             // btnBack
             // 
@@ -301,10 +300,10 @@
             this.btnBack.Location = new System.Drawing.Point(104, 253);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(41, 40);
-            this.btnBack.TabIndex = 1;
+            this.btnBack.TabIndex = 19;
             this.btnBack.Text = "<";
             this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBackClick);
+            this.btnBack.Click += new System.EventHandler(this.btnClick);
             // 
             // Form1
             // 
