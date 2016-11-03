@@ -8,3 +8,4 @@ U:\Lab3\Lab3\obj\Release\Lab3.Properties.Resources.resources
 U:\Lab3\Lab3\obj\Release\Lab3.csproj.GenerateResource.Cache
 U:\Lab3\Lab3\obj\Release\Lab3.exe
 U:\Lab3\Lab3\obj\Release\Lab3.pdb
+U:\Lab3\Lab3\obj\Release\Lab3.csprojResolveAssemblyReference.cache

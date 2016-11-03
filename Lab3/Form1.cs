@@ -92,7 +92,7 @@ namespace Lab3
         // Adds operator to expression only if valid
         private void addOperator(char input)
         {
-            if (input == '-' || txtBox.TextLength > 0 && checkOperator(txtBox.TextLength - 1)) 
+            if (input == '-' || txtBox.TextLength > 0 && checkOperator(txtBox.TextLength - 1) && txtBox.Text[txtBox.TextLength - 1] != '.') 
                 txtBox.Text += input;
         }
 
