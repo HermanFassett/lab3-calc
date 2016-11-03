@@ -57,7 +57,8 @@ namespace Lab3
                     break;
                 case '=':
                 case (char)Keys.Enter:
-                    if (txtBox.TextLength > 0 && checkOperator(txtBox.TextLength - 1))
+                    if (txtBox.TextLength > 0 && 
+                        checkOperator(txtBox.TextLength - 1) && checkPeriod(txtBox.TextLength - 1) && checkParentheses())
                     {
                         string answer = calculate(txtBox.Text);
                         txtBox.Text = answer;
@@ -72,7 +73,7 @@ namespace Lab3
                 case '.':
                     // Make sure only one point is in current number
                     int count = 0, i = txtBox.TextLength - 1;
-                    for (; i > 0 && checkOperator(i); i--)
+                    for (; i >= 0 && checkOperator(i); i--)
                     {
                         if (txtBox.Text[i] == '.')
                         {
@@ -92,15 +93,18 @@ namespace Lab3
         // Adds operator to expression only if valid
         private void addOperator(char input)
         {
-            if (input == '-' || txtBox.TextLength > 0 && checkOperator(txtBox.TextLength - 1) && txtBox.Text[txtBox.TextLength - 1] != '.') 
+            if ((input == '-' && (txtBox.TextLength == 0 || checkPeriod(txtBox.TextLength - 1))) ||
+                (txtBox.TextLength > 0 && checkOperator(txtBox.TextLength - 1) && checkPeriod(txtBox.TextLength - 1))) 
                 txtBox.Text += input;
         }
 
         // Adds parentheses to expression if valid to do so
         private void addParen(char input)
         {
+            int len = txtBox.TextLength;
             if (input == '(') txtBox.Text += input;
-            else if (input == ')' && txtBox.Text[txtBox.TextLength - 1] != '(' &&
+            else if (input == ')' && len > 0 && checkOperator(len - 1) &&
+                checkPeriod(len - 1) && txtBox.Text[len - 1] != '(' &&
                 Regex.Matches(txtBox.Text, @"\(").Count > Regex.Matches(txtBox.Text, @"\)").Count)
                 txtBox.Text += input;
         }
@@ -108,7 +112,7 @@ namespace Lab3
         // Checks if the char at index is an operator
         private bool checkOperator(int index)
         {
-            char prev = txtBox.Text[index];
+            char prev = index < txtBox.TextLength && index >= 0 ? txtBox.Text[index] : 'x';
             return prev != '+' && prev != '-' && prev != '/' && prev != '*' && prev != '^';
         }
 
@@ -116,6 +120,18 @@ namespace Lab3
         private bool checkOperator(char a)
         {
             return a != '+' && a != '-' && a != '/' && a!= '*' && a != '^';
+        }
+
+        // Checks if the char at index is a period
+        private bool checkPeriod(int index)
+        {
+            return index < txtBox.TextLength && index >= 0 && txtBox.Text[index] != '.';
+        }
+
+        // Checks if all parentheses are closed
+        private bool checkParentheses()
+        {
+            return Regex.Matches(txtBox.Text, @"\(").Count == Regex.Matches(txtBox.Text, @"\)").Count;
         }
 
         // If last action was calculate, acts on text accordingly with input
@@ -132,8 +148,7 @@ namespace Lab3
         private void validateExpression()
         {
             // Change TextBox back color for if expression is valid, invalid, or calculated
-            if (txtBox.TextLength > 0 && !checkOperator(txtBox.TextLength - 1) ||
-                Regex.Matches(txtBox.Text, @"\(").Count != Regex.Matches(txtBox.Text, @"\)").Count)
+            if (txtBox.TextLength > 0 && (!checkOperator(txtBox.TextLength - 1) || !checkPeriod(txtBox.TextLength - 1) || !checkParentheses()))
                 // Set to a light shade of red
                 txtBox.BackColor = Color.FromArgb(255, 235, 235);
             else if (!calculated)
@@ -171,7 +186,7 @@ namespace Lab3
                     }
                     exp += expression[i];
                 }
-                expression = expression.Substring(0, m.Index) + calculate(exp) + expression.Substring(i + 1);
+                expression = expression.Substring(0, m.Index) + calculate(exp) + expression.Substring(i >= expression.Length ? expression.Length - 1 : i + 1);
             }
             // Math pow instead of bitwise or ^
             while (expression.Contains("^"))
